@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Help Center - Enhanced Photos & Features</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+<style>
+    /* Reset & base */
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        background: linear-gradient(135deg, #0d1b2a, #1b263b);
+        color: #cfd8dc;
+        font-family: 'Roboto', sans-serif;
+        margin: 0; padding: 0;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    /* Light theme */
+    body.light-mode {
+        background: #f9fafb;
+        color: #1f2937;
+    }
+    a {
+        color: #81d4fa;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+        color: #4fc3f7;
+        text-decoration: underline;
+        outline: none;
+    }
+    /* Container and layout */
+    .page-wrapper {
+        display: flex;
+        min-height: 100vh;
+        padding-top: 60px;
+    }
+    aside#sidebar {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        height: calc(100vh - 60px);
+        width: 250px;
+        background: #14253d;
+        border-right: 1px solid #23406b;
+        padding: 30px 20px;
+        overflow-y: auto;
+        box-shadow: 3px 0 8px rgba(0,0,0,0.9);
+        transition: transform 0.3s ease;
+        z-index: 100;
+    }
+    aside#sidebar.hide {
+        transform: translateX(-260px);
+    }
+    /* Light mode sidebar */
+    body.light-mode aside#sidebar {
+        background: #fefefe;
+        border-right: 1px solid #ddd;
+        box-shadow: 3px 0 8px rgba(0,0,0,0.05);
+    }
+    nav#sidebar-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    nav#sidebar-nav ul li {
+        margin-bottom: 16px;
+        font-weight: 500;
+    }
+    nav#sidebar-nav ul li a {
+        color: #a0c4ff;
+        font-size: 15px;
+        display: block;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: background-color 0.25s ease;
+    }
+    body.light-mode nav#sidebar-nav ul li a {
+        color: #2563eb;
+    }
+    nav#sidebar-nav ul li a:hover,
+    nav#sidebar-nav ul li a.active {
+        background: #2954a3;
+        color: #e3f2fd;
+    }
+    body.light-mode nav#sidebar-nav ul li a:hover,
+    body.light-mode nav#sidebar-nav ul li a.active {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+    /* Main content container */
+    main.container {
+        max-width: 900px;
+        margin: 0 auto 40px;
+        background: #14253d;
+        border-radius: 16px;
+        padding: 40px 50px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+        flex: 1;
+        overflow-wrap: break-word;
+        transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    body.light-mode main.container {
+        background: #fff;
+        color: #374151;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    /* Header and Top bar */
+    header#topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: #1e3554;
+        border-bottom: 1px solid #2954a3;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        color: #e3f2fd;
+        z-index: 110;
+        user-select: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        justify-content: space-between;
+        font-weight: 700;
+    }
+    body.light-mode header#topbar {
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+        color: #1f2937;
+        box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+    }
+    #toggle-sidebar {
+        background: transparent;
+        border: none;
+        color: #81d4fa;
+        font-size: 28px;
+        cursor: pointer;
+        margin-right: 20px;
+        user-select: none;
+        transition: color 0.3s ease;
+    }
+    body.light-mode #toggle-sidebar {
+        color: #2563eb;
+    }
+    #toggle-sidebar:focus {
+        outline: 2px solid #4fc3f7;
+        outline-offset: 2px;
+    }
+    header h1 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.4rem;
+        user-select: text;
+        flex-grow: 1;
+        text-align: center;
+    }
+    /* Content typography & colors */
+    h1, h2, h3 {
+        color: #81d4fa;
+        margin-top: 0;
+        font-weight: 700;
+    }
+    body.light-mode h1, body.light-mode h2, body.light-mode h3 {
+        color: #2563eb;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 10px #4fc3f7;
+    }
+    body.light-mode h1 {
+        text-shadow: none;
+    }
+    p, li, ol {
+        font-size: 16px;
+        color: #cfd8dc;
+        line-height: 1.6;
+    }
+    body.light-mode p, body.light-mode li, body.light-mode ol {
+        color: #374151;
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    ul li {
+        background: #1e3554;
+        margin-bottom: 12px;
+        padding: 16px 22px;
+        border-radius: 12px;
+        font-weight: 500;
+        color: #b0cce6;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: inset 0 0 12px #0f2040;
+        transition:  0.25s ease, color 0.25s ease;
+        user-select: none;
+    }
+    body.light-mode ul li {
+        background: #dbeafe;
+        color: #1e40af;
+        box-shadow: none;
+    }
+    ul li:hover {
+        background: #2954a3;
+        color: #e1f5fe;
+    }
+    body.light-mode ul li:hover {
+        background: #bfdbfe;
+        color: #1e3a8a;
+    }
+    .example-prompts p {
+        font-style: italic;
+        color: #90caf9;
+        margin-bottom: 14px;
+        font-size: 17px;
+        font-weight: 400;
+    }
+    body.light-mode .example-prompts p {
+        color: #3b82f6;
+    }
+    .example-prompts ul li {
+        background: #2a4a82;
+        font-weight: 600;
+        color: #a3cef1;
+    }
+    body.light-mode .example-prompts ul li {
+        background: #bfdbfe;
+        color: #1e40af;
+    }
+    ol {
+        padding-left: 24px;
+        font-size: 16px;
+        color: #a9cce3;
+        line-height: 1.65;
+        font-weight: 400;
+    }
+    body.light-mode ol {
+        color: #374151;
+    }
+    /* FAQ accordion */
+    .faq-item {
+        border-bottom: 1px solid #274a7c;
+    }
+    body.light-mode .faq-item {
+        border-bottom: 1px solid #d1d5db;
+    }
+    .faq-question {
+        background: #1e3c72;
+        cursor: pointer;
+        padding: 18px 24px;
+        font-weight: 600;
+        color: #bbdefb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 14px;
+        margin-bottom: 8px;
+        user-select: none;
+        box-shadow: 0 0 12px #103060aa inset;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.light-mode .faq-question {
+        background: #e0e7ff;
+        color: #4338ca;
+        box-shadow: none;
+    }
+    .faq-question:hover, .faq-question:focus {
+        background-color: #2c51a0;
+        color: #e3f2fd;
+        outline: none;
+    }
+    body.light-mode .faq-question:hover, body.light-mode .faq-question:focus{
+        background-color: #c7d2fe;
+        color: #3730a3;
+    }
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 24px;
+        font-size: 15px;
+        color: #cfd8dc;
+        line-height: 1.5;
+        transition: max-height 0.4s ease, padding 0.4s ease, color 0.4s ease;
+    }
+    body.light-mode .faq-answer {
+        color: #374151;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 650px;
+        padding: 14px 24px 20px;
+    }
+    .faq-item.active .faq-question::after {
+        content: "▲";
+        font-size: 14px;
+        color: #81d4fa;
+    }
+    body.light-mode .faq-item.active .faq-question::after {
+        color: #2563eb;
+    }
+    .faq-question::after {
+        content: "▼";
+        font-size: 14px;
+        color: #81d4fa;
+    }
+    body.light-mode .faq-question::after {
+        color: #2563eb;
+    }
+    /* Feedback buttons */
+    .feedback-buttons {
+        margin-top: 14px;
+    }
+    .feedback-buttons button {
+        background: #0a84ff;
+        border: none;
+        color: #e1f5fe;
+        font-size: 22px;
+        padding: 12px 24px;
+        margin-right: 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px #0a84ffaa;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    body.light-mode .feedback-buttons button {
+        background: #2563eb;
+        color: #f9fafb;
+        box-shadow: 0 4px 12px #2563ebaa;
+    }
+    .feedback-buttons button:hover, .feedback-buttons button:focus {
+        background-color: #005ecb;
+        box-shadow: 0 6px 20px #005ecbaa;
+        outline: none;
+    }
+    body.light-mode .feedback-buttons button:hover,
+    body.light-mode .feedback-buttons button:focus {
+        background-color: #1e40af;
+        box-shadow: 0 6px 20px #1e40afaa;
+    }
+    /* Contact section */
+    .contact {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #a9cce3;
+        text-align: center;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    body.light-mode .contact {
+        color: #374151;
+    }
+    .contact a {
+        color: #40c4ff;
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    body.light-mode .contact a {
+        color: #2563eb;
+    }
+    .contact a:hover, .contact a:focus {
+        color: #80d8ff;
+        text-decoration: underline;
+        outline: none;
+    }
+    /* Chat usage gif styling */
+    .chat-gif {
+        max-width: 100%;
+        border-radius: 14px;
+        box-shadow: 0 4px 25px #0a84ffaa;
+        margin-top: 18px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    body.light-mode .chat-gif {
+        box-shadow: 0 4px 25px #99bbffcc;
+    }
+    /* Callout boxes */
+    .callout-warning {
+        background: #442c2c;
+        border-left: 6px solid #f44336;
+        color: #fbcac9;
+        padding: 18px 24px;
+        border-radius: 12px;
+        margin: 20px 0;
+        font-weight: 600;
+        box-shadow: inset 0 0 15px #7e1212a6;
+        user-select:none;
+    }
+    body.light-mode .callout-warning {
+        background: #fee2e2;
+        color: #991b1b;
+        border-left-color: #dc2626;
+        box-shadow: none;
+    }
+    .callout-info {
+        background: #24475d;
+        border-left: 6px solid #42a5f5;
+        color: #a9d3fb;
+        padding: 18px 24px;
+        border-radius: 12px;
+        margin: 20px 0;
+        font-weight: 500;
+        box-shadow: inset 0 0 15px #3e7ab5a6;
+        user-select:none;
+    }
+    body.light-mode .callout-info {
+        background: #dbf4ff;
+        color: #2563eb;
+        border-left-color: #2563eb;
+        box-shadow: none;
+    }
+    /* Contact form */
+    form#contact-form {
+        background: #1a2a47;
+        padding: 24px 28px;
+        border-radius: 14px;
+        max-width: 600px;
+        margin: 20px auto 0;
+        box-shadow: 0 6px 18px #103060bb;
+        color: #cfd8dc;
+        user-select:none;
+    }
+    body.light-mode form#contact-form {
+        background: #fff;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        color: #475569;
+    }
+    form#contact-form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #81d4fa;
+        user-select:none;
+    }
+    body.light-mode form#contact-form label {
+        color: #2563eb;
+    }
+    form#contact-form input[type="email"],
+    form#contact-form textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: none;
+        resize: vertical;
+        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+        background-color: #0f1f38;
+        color: #c9e7ff;
+        box-shadow: inset 0 0 8px #164576;
+        margin-bottom: 16px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        user-select:text;
+    }
+    body.light-mode form#contact-form input[type="email"],
+    body.light-mode form#contact-form textarea {
+        background-color: #f9fafb;
+        color: #374151;
+        box-shadow: inset 0 0 8px #d1d5db;
+    }
+    form#contact-form input[type="email"]:focus,
+    form#contact-form textarea:focus {
+        background-color: #1b365e;
+        outline: none;
+        box-shadow: 0 0 10px #4899ff;
+    }
+    body.light-mode form#contact-form input[type="email"]:focus,
+    body.light-mode form#contact-form textarea:focus {
+        background-color: #dbeafe;
+        box-shadow: 0 0 10px #2563eb;
+        color: #1e3a8a;
+    }
+    form#contact-form button[type="submit"] {
+        background: #0a84ff;
+        border: none;
+        color: #e1f5fe;
+        font-size: 18px;
+        padding: 12px 28px;
+        border-radius: 14px;
+        cursor: pointer;
+        width: 100%;
+        box-shadow: 0 6px 16px #0a84ffcc;
+        font-weight: 700;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        user-select:none;
+    }
+    body.light-mode form#contact-form button[type="submit"] {
+        background: #2563eb;
+        box-shadow: 0 6px 16px #2563ebcc;
+    }
+    form#contact-form button[type="submit"]:hover,
+    form#contact-form button[type="submit"]:focus {
+        background-color: #005ecb;
+        box-shadow: 0 8px 22px #005ecbcc;
+        outline: none;
+    }
+    body.light-mode form#contact-form button[type="submit"]:hover,
+    body.light-mode form#contact-form button[type="submit"]:focus {
+        background-color: #1e40af;
+        box-shadow: 0 8px 22px #1e40afcc;
+    }
+    /* Back to top button */
+    #back-to-top {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        background: #0a84ff;
+        border: none;
+        color: #e1f5fe;
+        font-size: 24px;
+        padding: 14px 18px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 6px 18px #0a84ffaa;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        z-index: 150;
+        display: none;
+    }
+    #back-to-top:hover {
+        background-color: #005ecb;
+        box-shadow: 0 9px 26px #005ecbaa;
+    }
+    /* Images with subtle glow & gallery */
+    img.intro-image, img.chat-gif {
+        filter: drop-shadow(0 0 8px #42a5f5cc);
+        transition: filter 0.3s ease;
+        max-width: 100%;
+        height: auto;
+        border-radius: 16px;
+        user-select:none;
+    }
+    img.intro-image:hover, img.chat-gif:hover {
+        filter: drop-shadow(0 0 16px #81d4faee);
+    }
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+        aside#sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 220px;
+            height: calc(100vh - 60px);
+            padding: 25px 15px;
+        }
+        main.container {
+            padding: 30px 30px;
+            margin: 0 10px 40px 240px;
+        }
+    }
+    @media (max-width: 700px) {
+        .page-wrapper {
+            flex-direction: column;
+        }
+        aside#sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
+            padding: 16px 10px;
+            border-right: none;
+            box-shadow: none;
+            transform: translateX(0) !important;
+            z-index: auto;
+        }
+        main.container {
+            margin: 0 auto 60px;
+            padding: 30px 20px;
+            width: 100%;
+        }
+        header#topbar #toggle-sidebar {
+            display: none;
+        }
+    }
+    /* Search bar */
+    .search-container {
+        position: relative;
+        margin-bottom: 24px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .search-container input[type="search"] {
+        width: 100%;
+        padding: 14px 48px 14px 20px;
+        border-radius: 9999px;
+        border: none;
+        font-size: 16px;
+        background: #2a4a82;
+        color: #a3cef1;
+        box-shadow: inset 0 0 12px #0f2040;
+        outline: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        user-select:text;
+    }
+    body.light-mode .search-container input[type="search"] {
+        background: #e0e7ff;
+        color: #1e3a8a;
+        box-shadow: none;
+    }
+    .search-container input[type="search"]::placeholder {
+        color: #a0c4ff;
+    }
+    body.light-mode .search-container input[type="search"]::placeholder {
+        color: #6b7280;
+    }
+    .search-icon {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 20px;
+        color: #a3cef1;
+    }
+    body.light-mode .search-icon {
+        color: #2563eb;
+    }
+    /* Floating Help Button */
+    #floating-help-btn {
+        position: fixed;
+        bottom: 90px;
+        right: 28px;
+        background: #0a84ff;
+        color: #e1f5fe;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 6px 18px #0a84ffaa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        border: none;
+        z-index: 200;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #floating-help-btn:hover, #floating-help-btn:focus {
+        background-color: #005ecb;
+        box-shadow: 0 9px 26px #005ecbaa;
+        outline: none;
+    }
+    /* Dark mode toggle switch */
+    .dark-mode-toggle-wrapper {
+        position: fixed;
+        top: 10px;
+        right: 100px;
+        background: #14253dcc;
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #81d4fa;
+        font-weight: 600;
+        user-select:none;
+        z-index: 120;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .dark-mode-toggle-wrapper:hover, .dark-mode-toggle-wrapper:focus {
+        background: #2954a3cc;
+        outline: none;
+    }
+    body.light-mode .dark-mode-toggle-wrapper {
+        background: #dbeafecc;
+        color: #2563eb;
+    }
+    body.light-mode .dark-mode-toggle-wrapper:hover, 
+    body.light-mode .dark-mode-toggle-wrapper:focus {
+        background: #c7d2fecc;
+    }
+    /* Toggle switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 28px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 28px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #0a84ff;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    /* "Try this" clickable examples */
+    .try-this-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 10px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .try-this-list li {
+        background: #2954a3;
+        color: #dbeafe;
+        border-radius: 12px;
+        padding: 12px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 12px;
+        box-shadow: 0 0 12px #1f396c inset;
+        user-select:none;
+        transition: background-color 0.3s ease;
+    }
+    body.light-mode .try-this-list li {
+        background: #bfdbfe;
+        color: #1e40af;
+        box-shadow: none;
+    }
+    .try-this-list li:hover, .try-this-list li:focus {
+        background-color: #3f62d6;
+        outline: none;
+        color: white;
+    }
+    body.light-mode .try-this-list li:hover, body.light-mode .try-this-list li:focus {
+        background-color: #60a5fa;
+        color: #1e40af;
+    }
+    /* Gallery photos section */
+    #photo-gallery {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+        gap: 24px;
+        justify-items: center;
+    }
+    #photo-gallery figure {
+        margin: 0;
+        overflow: hidden;
+        border-radius: 24px;
+        box-shadow: 0 10px 24px rgb(40 76 216 / 0.8);
+        background: #1e3554;
+        transition: transform 0.4s cubic-bezier(0.55,0.055,0.675,0.19), box-shadow 0.4s ease;
+        cursor: pointer;
+        user-select:none;
+        position: relative;
+    }
+    body.light-mode #photo-gallery figure {
+        background: #efefff;
+        box-shadow: 0 10px 24px rgba(40,76,216,0.3);
+    }
+    #photo-gallery figure:hover,
+    #photo-gallery figure:focus-within {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgb(40 76 216 / 0.95);
+        outline: none;
+    }
+    #photo-gallery img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 24px;
+        transition: filter 0.3s ease;
+        user-select:none;
+    }
+    /* Demo chatbot input */
+    #chatbot-demo-container {
+        position: sticky;
+        bottom: 20px;
+        background: #1e3c72;
+        padding: 12px 18px;
+        border-radius: 30px;
+        max-width: 640px;
+        margin: 20px auto 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 6px 20px rgb(40 76 216 / 0.8);
+        user-select: none;
+    }
+    body.light-mode #chatbot-demo-container {
+        background: #dbeafe;
+        box-shadow: 0 6px 20px #60a5fa99;
+        color: #1e40af;
+    }
+    #chatbot-demo {
+        flex-grow: 1;
+        border-radius: 20px;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+        color: inherit;
+        background-color: rgba(255 255 255 / 0.15);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        user-select:text;
+    }
+    body.light-mode #chatbot-demo {
+        background-color: white;
+        color: #1e40af;
+        box-shadow: inset 0 0 8px #a5b4fc;
+    }
+    #chatbot-demo::placeholder {
+        color: #cfd8dc;
+    }
+    body.light-mode #chatbot-demo::placeholder {
+        color: #9ca3af;
+    }
+    #chatbot-send-btn {
+        background: #42a5f5;
+        border: none;
+        color: white;
+        font-weight: 700;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 12px 20px;
+        font-size: 16px;
+        user-select:none;
+        transition: background-color 0.3s ease;
+    }
+    #chatbot-send-btn:hover, #chatbot-send-btn:focus {
+        background-color: #1e88e5;
+        outline: none;
+    }
+    body.light-mode #chatbot-send-btn {
+        background: #2563eb;
+    }
+    body.light-mode #chatbot-send-btn:hover, body.light-mode #chatbot-send-btn:focus {
+        background-color: #1e40af;
+    }
+    /* Modal Styles */
+    #image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0; top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.85);
+        backdrop-filter: blur(5px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    #image-modal.active {
+        display: flex;
+    }
+    #image-modal .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        background: #1e3554;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(40,76,216,0.9);
+        position: relative;
+        color: #e3f2fd;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    body.light-mode #image-modal .modal-content {
+        background: #e0e7ff;
+        color: #1e40af;
+        box-shadow: 0 0 40px rgba(37,99,235,0.7);
+    }
+    #image-modal img {
+        max-width: 100%;
+        max-height: 70vh;
+        border-radius: 20px 20px 0 0;
+        user-select:none;
+    }
+    #image-modal figcaption {
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        background: rgba(0,0,0,0.4);
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+        user-select:none;
+    }
+    body.light-mode #image-modal figcaption {
+        background: rgba(255,255,255,0.7);
+        color: #1e40af;
+    }
+    .close-modal-btn {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        background: transparent;
+        font-size: 32px;
+        color: #e3f2fd;
+        border: none;
+        cursor: pointer;
+        user-select:none;
+        transition: color 0.3s ease;
+        font-weight: 700;
+        padding: 0;
+    }
+    .close-modal-btn:hover, .close-modal-btn:focus {
+        color: #42a5f5;
+        outline: none;
+    }
+    body.light-mode .close-modal-btn {
+        color: #2563eb;
+    }
+</style>
+</head>
+<body>
+<header id="topbar" role="banner">
+    <button id="toggle-sidebar" aria-label="Toggle navigation menu" aria-expanded="true" aria-controls="sidebar">&#9776;</button>
+    <h1>🩺 Help Center</h1>
+    <div class="dark-mode-toggle-wrapper" tabindex="0" role="switch" aria-checked="false" aria-label="Dark mode toggle">
+        🌙 Dark Mode
+        <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle" aria-label="Toggle dark mode" />
+            <span class="slider"></span>
+        </label>
+    </div>
+</header>
+
+<div class="page-wrapper">
+    <aside id="sidebar" role="navigation" aria-label="Main navigation menu">
+        <nav id="sidebar-nav">
+            <ul>
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#features">Medical Features</a></li>
+                <li><a href="#example-prompts">Example Prompts</a></li>
+                <li><a href="#try-this-section">Try This</a></li>
+                <li><a href="#how-to-use">How to Use</a></li>
+                <li><a href="#photo-gallery">Photo Gallery</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#feedback-support">Feedback & Support</a></li>
+                <li><a href="#contact-form-section">Contact Form</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container" role="main">
+        <div class="search-container" role="search">
+            <input type="search" id="search-input" placeholder="🔍 Search help articles..." aria-label="Search help articles" autocomplete="off" />
+            <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+
+
+        <section id="introduction" aria-labelledby="introduction-title" class="help-section">
+            <h2 id="introduction-title">Introduction</h2>
+            <p>Welcome to your personal medical assistant chatbot. Here to provide reliable health information, symptom checking, and support to help you manage your health better.</p>
+            <div class="callout-info" role="note" aria-label="Important note">
+                🛑 <strong>Note:</strong> The chatbot provides informational support only and does not replace professional medical advice. Always consult a healthcare professional for urgent or complex conditions.
+            </div>
+        </section>
+
+        <section id="features" aria-labelledby="features-title" class="help-section">
+            <h2 id="features-title">Medical Features</h2>
+            <ul>
+                <li>💊 Provide information about medications and dosages</li>
+                <li>🩺 Help check symptoms and suggest possible conditions</li>
+                <li>📅 Schedule or remind you of medical appointments</li>
+                <li>🍎 Offer health tips and personalized wellness advice</li>
+                <li>📞 Guide you to emergency services if urgent care is needed</li>
+                <li>🔒 Keep all your health data secure and confidential</li>
+            </ul>
+            <img src="c:\Users\stech\Pictures\medical consultation illustration.png" alt="Medical consultation illustration" style="width:70%;height:500px;margin-left:100px; margin-top:20px; border-radius:5px; box-shadow: 0 0 25px #176f8faa;">
+        </section>
+
+        <section id="example-prompts" class="example-prompts help-section" aria-labelledby="prompts-title">
+            <h2 id="prompts-title">Example Prompts You Can Try</h2>
+            <p>Try asking the chatbot questions like:</p>
+            <ul>
+                <li>❓ What are the side effects of ibuprofen?</li>
+                <li>💡 Should I see a doctor for my persistent headache?</li>
+                <li>🩺 I have a fever and cough, what could this mean?</li>
+                <li>📅 Remind me about my upcoming doctor appointment</li>
+                <li>🍎 How can I improve my sleep quality?</li>
+            </ul>
+        </section>
+
+        <section id="try-this-section" class="help-section" aria-labelledby="try-this-title">
+            <h2 id="try-this-title">🧪 Try This - Interactive Examples</h2>
+            <ul class="try-this-list" role="list">
+                <li tabindex="0" role="button" aria-label="Try asking: How do I reset my password?">❓ How do I reset my password?</li>
+                <li tabindex="0" role="button" aria-label="Try asking: What symptoms indicate flu?">🩺 What symptoms indicate flu?</li>
+                <li tabindex="0" role="button" aria-label="Try asking: Tell me about ibuprofen side effects.">💊 Tell me about ibuprofen side effects.</li>
+                <li tabindex="0" role="button" aria-label="Try asking: How to schedule an appointment?">📅 How to schedule an appointment?</li>
+                <li tabindex="0" role="button" aria-label="Try asking: Tips for better sleep.">🍎 Tips for better sleep.</li>
+            </ul>
+        </section>
+
+        <section id="how-to-use" aria-labelledby="howto-title" class="help-section">
+            <h2 id="howto-title">How to Use the Medical Chatbot</h2>
+            <ol>
+                <li>Open the chat window on the bottom right corner of your screen.</li>
+                <li>Type your medical question or concern in the text box.</li>
+                <li>Press Enter or tap Send to receive helpful information or guidance.</li>
+                <li>Follow the recommendations or contact your healthcare provider if necessary.</li>
+            </ol>
+            <img src="https://i.gifer.com/YCZH.gif" alt="Animation of chatbot interaction" class="chat-gif" />
+        </section>
+
+        <section id="photo-gallery" aria-labelledby="gallery-title" class="help-section">
+            <h2 id="gallery-title">📸 Medical Photo Gallery</h2>
+            <div id="photo-gallery" role="list">
+                <figure tabindex="0" role="listitem" aria-label="Doctor consulting patient" data-caption="A doctor consulting with a patient in a modern medical facility.">
+                    <img src="c:\Users\stech\Pictures\doctor consulting patient.png" alt="Doctor consulting patient" />
+                </figure>
+                <figure tabindex="0" role="listitem" aria-label="Medical technology analysis" data-caption="Advanced medical technology being examined by a healthcare professional.">
+                    <img src="c:\Users\stech\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\ED519C02F134F2CDD836CBA387B6A3C8\WhatsApp Image 2025-05-24 at 17.54.51_32915afc.jpg" alt="Medical technology analysis" />
+                </figure>
+                
+                <figure tabindex="0" role="listitem" aria-label="Healthcare team discussing" data-caption="Team of healthcare professionals discussing patient treatment plans.">
+                    <img src="c:\Users\stech\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\7E6FF0205749BC6025B51155E26F6CED\WhatsApp Image 2025-05-24 at 18.26.06_4a168828.jpg" alt="Healthcare team discussing" />
+                </figure>
+            </div>
+        </section>
+
+        <section id="faqs" class="common-questions help-section" aria-labelledby="faq-title">
+            <h2 id="faq-title">Common Questions (FAQ)</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq1-answer" id="faq1-question">🛠 Technical Help</div>
+                <div class="faq-answer" id="faq1-answer" role="region" aria-labelledby="faq1-question">
+                    <p><strong>What if the chatbot doesn’t respond?</strong></p>
+                    <p>Refresh your browser or check your internet connection. If the issue persists, contact support.</p>
+
+                    <p><strong>How do I report inaccuracies or issues with medical info?</strong></p>
+                    <p>Use the contact form below or email our support team with details.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq2-answer" id="faq2-question">💬 Chat Commands</div>
+                <div class="faq-answer" id="faq2-answer" role="region" aria-labelledby="faq2-question">
+                    <p>Common questions or commands include:</p>
+                    <ul>
+                        <li>symptoms - Start a symptom checker session</li>
+                        <li>medication info - Ask about medications</li>
+                        <li>appointment - Schedule or check appointments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq3-answer" id="faq3-question">🔒 Privacy & Security</div>
+                <div class="faq-answer" id="faq3-answer" role="region" aria-labelledby="faq3-question">
+                    <p>All your health data is encrypted and securely stored. We are committed to protecting your privacy.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq4-answer" id="faq4-question">⚙ Customization Options</div>
+                <div class="faq-answer" id="faq4-answer" role="region" aria-labelledby="faq4-question">
+                    <p>You can configure notifications and personal alerts in your profile settings.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="troubleshooting" aria-labelledby="troubleshooting-title" class="help-section">
+            <h2 id="troubleshooting-title">Troubleshooting</h2>
+            <p>If the chatbot isn’t responding or seems slow, try the following:</p>
+            <ul>
+                <li>Reload the webpage</li>
+                <li>Check your internet connection</li>
+                <li>Clear your browser cache</li>
+                <li>Use a different browser or device</li>
+            </ul>
+            <div class="callout-warning" role="alert" aria-live="assertive">
+                ⚠ Important: If you experience persistent issues, please submit your problem with details below or contact support immediately.
+            </div>
+        </section>
+
+        <section id="feedback-support" aria-labelledby="feedback-title" class="help-section">
+            <h2 id="feedback-title">Feedback & Support</h2>
+            <p>Was this information helpful?</p>
+            <div class="feedback-buttons" role="group" aria-label="Feedback buttons for helpfulness">
+                <button aria-label="Thumbs up" title="Yes">👍</button>
+                <button aria-label="Thumbs down" title="No">👎</button>
+            </div>
+            <p class="contact">
+                Need more assistance? Contact us at 
+                <a href="mailto:support@medicalchatbot.com" tabindex="0">support@medicalchatbot.com</a>
+                or chat with a live healthcare representative.
+            </p>
+        </section>
+
+        <section id="contact-form-section" aria-labelledby="contact-form-title" class="help-section">
+            <h2 id="contact-form-title">Contact Form</h2>
+            <form id="contact-form" novalidate>
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" autocomplete="email" />
+                
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Describe your question or issue..." required aria-required="true"></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Demo chatbot input for Try This examples -->
+        <div id="chatbot-demo-container" aria-label="Chatbot input demo">
+            <input type="text" id="chatbot-demo" placeholder="Ask your medical chatbot here..." aria-label="Chatbot input box" autocomplete="off" />
+            <button id="chatbot-send-btn" aria-label="Send message to chatbot">Send</button>
+        </div>
+    </main>
+</div>
+
+<!-- Image Modal -->
+<div id="image-modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption" tabindex="-1">
+    <div class="modal-content">
+        <button class="close-modal-btn" aria-label="Close image details">&times;</button>
+        <img src="" alt="" id="modal-image" />
+        <figcaption id="modal-caption"></figcaption>
+    </div>
+</div>
+
+<button id="back-to-top" aria-label="Back to top" title="Back to top">⬆</button>
+<button id="floating-help-btn" aria-label="Toggle help panel" title="Toggle help panel" aria-pressed="false">❓</button>
+
+<script>
+    // Sidebar toggle for smaller screens
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hide');
+        const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+        toggleBtn.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Highlight active nav link on scroll
+    const navLinks = document.querySelectorAll('#sidebar-nav ul li a');
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY + 120; // offset for topbar height + padding
+        sections.forEach((section, idx) => {
+            if (section.offsetTop <= scrollPos && (section.offsetTop + section.offsetHeight) > scrollPos) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                navLinks[idx].classList.add('active');
+            }
+        });
+    });
+
+    // Accordion functionality with ARIA updates
+    document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', () => {
+            const parent = item.parentElement;
+            const currentlyActive = parent.classList.contains('active');
+            // close all others
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+                faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+            if (!currentlyActive) {
+                parent.classList.add('active');
+                item.setAttribute('aria-expanded', 'true');
+            }
+        });
+        // Keyboard accessibility for enter/space
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
+            }
+        });
+    });
+
+    // Back to top button show/hide and scroll
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Contact Form simple validation & demo submit
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.email.value.trim() || !form.message.value.trim()) {
+            alert('Please fill in both email and message fields.');
+            return;
+        }
+        alert('Thank you for contacting us! We will get back to you shortly.');
+        form.reset();
+    });
+
+    // Floating help button toggles sidebar for small screens
+    const floatingHelpBtn = document.getElementById('floating-help-btn');
+    floatingHelpBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hide');
+        const pressed = floatingHelpBtn.getAttribute('aria-pressed') === 'true';
+        floatingHelpBtn.setAttribute('aria-pressed', !pressed);
+    });
+
+    // Dark mode toggle
+    const darkToggle = document.getElementById('dark-mode-toggle');
+    const darkToggleWrapper = darkToggle.parentElement.parentElement;
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function setTheme(dark) {
+        if (dark) {
+            document.body.classList.remove('light-mode');
+            darkToggle.checked = true;
+            darkToggleWrapper.setAttribute('aria-checked', 'true');
+        } else {
+            document.body.classList.add('light-mode');
+            darkToggle.checked = false;
+            darkToggleWrapper.setAttribute('aria-checked', 'false');
+        }
+    }
+    // Initialize theme with saved or system preference
+    const savedTheme = localStorage.getItem('medicalChatbotTheme');
+    if(savedTheme === 'light') {
+        setTheme(false);
+    } else if(savedTheme === 'dark') {
+        setTheme(true);
+    } else {
+        setTheme(prefersDark);
+    }
+
+    darkToggle.addEventListener('change', () => {
+        setTheme(darkToggle.checked);
+        localStorage.setItem('medicalChatbotTheme', darkToggle.checked ? 'dark' : 'light');
+    });
+
+    // Search filter for help sections - searches in titles and content, including FAQs
+    const searchInput = document.getElementById('search-input');
+    const helpSections = document.querySelectorAll('.help-section');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        // If no query, show all
+        if (!query) {
+            helpSections.forEach(sec => sec.style.display = '');
+            faqItems.forEach(faq => faq.style.display = '');
+            return;
+        }
+        // Filter helpSections: check if title or content matches
+        helpSections.forEach(sec => {
+            const title = sec.querySelector('h2')?.innerText.toLowerCase() ?? '';
+            const text = sec.innerText.toLowerCase();
+            if (title.includes(query) || text.includes(query)) {
+                sec.style.display = '';
+            } else {
+                sec.style.display = 'none';
+            }
+        });
+        // Filter faqs too (in case user searching FAQ items)
+        faqItems.forEach(faq => {
+            const q = faq.querySelector('.faq-question').innerText.toLowerCase();
+            const a = faq.querySelector('.faq-answer').innerText.toLowerCase();
+            if(q.includes(query) || a.includes(query)){
+                faq.style.display = '';
+            } else {
+                faq.style.display = 'none';
+            }
+        });
+    });
+
+    // "Try This" interactive examples - populates chatbot input box on click
+    const tryThisItems = document.querySelectorAll('.try-this-list li');
+    const chatbotInput = document.getElementById('chatbot-demo');
+    const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+
+    tryThisItems.forEach(item => {
+        const text = item.textContent.trim().replace(/^❓?\s*/, '');
+        item.addEventListener('click', () => {
+            chatbotInput.value = text;
+            chatbotInput.focus();
+        });
+        item.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' || e.key === ' '){
+                e.preventDefault();
+                chatbotInput.value = text;
+                chatbotInput.focus();
+            }
+        });
+    });
+
+    // Demo "Send" button just alerts the message content (for demonstration)
+    chatbotSendBtn.addEventListener('click', () => {
+        const msg = chatbotInput.value.trim();
+        if(!msg) {
+            alert("Please type a message before sending.");
+            return;
+        }
+        alert("Message sent to chatbot: " + msg);
+        chatbotInput.value = '';
+        chatbotInput.focus();
+    });
+    chatbotInput.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter'){
+            chatbotSendBtn.click();
+            e.preventDefault();
+        }
+    });
+
+    // Modal functionality for photo gallery
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-caption');
+    const closeModalBtn = modal.querySelector('.close-modal-btn');
+    const galleryFigures = document.querySelectorAll('#photo-gallery figure');
+
+    galleryFigures.forEach(figure => {
+        figure.addEventListener('click', () => {
+            const img = figure.querySelector('img');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            modalCaption.textContent = figure.getAttribute('data-caption') || img.alt || '';
+            modal.classList.add('active');
+            modal.focus();
+            document.body.style.overflow = 'hidden'; // prevent background scroll
+        });
+        figure.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                figure.click();
+            }
+        });
+    });
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Close modal on click outside content
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal){
+            closeModal();
+        }
+    });
+
+    // Close modal on ESC key press
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && modal.classList.contains('active')){
+            closeModal();
+        }
+    });
+</script>
+</body>
+</html>

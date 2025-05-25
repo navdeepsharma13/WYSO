@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to Wyso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #e0e0e0;
+    }
+
+    #theme-toggle {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+
+    .hero {
+      background: #e9ecef;
+      padding: 50px 20px;
+      text-align: center;
+      border-bottom: 2px solid #007bff;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px 0;
+      transition: background 0.3s;
+    }
+
+    .cta-button.secondary {
+      background: #6c757d;
+    }
+
+    .cta-button:hover {
+      background: #0056b3;
+    }
+
+    .how-wyso-helps, .featured-techniques, .real-life-scenarios, .user-testimonials, .quick-start, .wellness-resources, .join-movement {
+      padding: 20px;
+      margin: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .benefit {
+      flex: 1 1 30%;
+      text-align: center;
+      margin: 10px;
+    }
+
+    .icon {
+      font-size: 2em;
+    }
+
+    .technique-tile {
+      background: #f8f9fa;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 5px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .technique-tile:hover {
+      background: #e2e6ea;
+    }
+
+    .technique-tile a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #007bff;
+      color: white;
+    }
+
+    .social-media a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #333;
+      color: #f4f4f4;
+    }
+
+    header.dark-mode {
+      background: #0056b3;
+    }
+
+    .how-wyso-helps.dark-mode, .featured-techniques.dark-mode, .real-life-scenarios.dark-mode, .user-testimonials.dark-mode, .quick-start.dark-mode, .wellness-resources.dark-mode, .join-movement.dark-mode {
+      background: #444;
+      color: #f4f4f4;
+    }
+
+    .technique-tile.dark-mode {
+      background: #555;
+    }
+
+    footer.dark-mode {
+      background: #0056b3;
+    }
+
+    /* FAQ Section */
+    .faq {
+      margin-top: 20px;
+    }
+
+    .faq-item {
+      margin-bottom: 10px;
+    }
+
+    .faq-question {
+      cursor: pointer;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+      background: #0056b3;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin-top: 5px;
+      background: #f8f9fa;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      .benefits {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .benefit {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Wyso</h1>
+    <nav>
+      <ul>
+        <li><a href="#welcome">Home</a></li>
+        <li><a href="#how-it-works">How Wyso Helps</a></li>
+        <li><a href="#techniques">Techniques</a></li>
+        <li><a href="#scenarios">When Can Wyso Help?</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#join">Join Us</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="welcome" class="hero">
+      <h2>Your Companion for Calm, Clarity & Connection</h2>
+      <p>
+        Reduce stress, ease anxiety, and feel heard — all with one intelligent, caring companion.
+      </p>
+      <a href="#chat" class="cta-button">Start Chatting</a>
+      <a href="#how-it-works" class="cta-button secondary">Learn How It Works</a>
+    </section>
+
+    <section id="how-it-works" class="how-wyso-helps">
+      <h2>How Wyso Helps</h2>
+      <div class="benefits">
+        <div class="benefit">
+          <span class="icon">🌿</span>
+          <h3>Reduce Stress Daily with Wyso</h3>
+          <p>Engage in daily conversations that help you unwind and relax.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon">🧠</span>
+          <h3>Tame Anxiety with Thoughtful Conversations</h3>
+          <p>Talk through your worries and find clarity in your thoughts.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon">❤</span>
+          <h3>Feel Heard: Emotional Bonding Through AI</h3>
+          <p>Experience a connection that understands your feelings.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon">📊</span>
+          <h3>Track Your Moods, Understand Your Mind</h3>
+          <p>Keep a record of your emotions and identify patterns over time.</p>
+        </div>
+        <div class="benefit">
+          <span class="icon">🌅</span>
+          <h3>Build Resilience with Gentle Habits</h3>
+          <p>Develop habits that promote mental well-being and resilience.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="techniques" class="featured-techniques">
+      <h2>Featured Techniques or Tools</h2>
+      <div class="technique-tile">✨ <a href="#">5-Minute Breathing Exercises</a></div>
+      <div class="technique-tile">✍ <a href="#">Daily Emotional Journaling</a></div>
+      <div class="technique-tile">🎯 <a href="#">Set & Track Mindful Habits</a></div>
+      <div class="technique-tile">🎵 <a href="#">Calming Soundscapes (coming soon)</a></div>
+      <div class="technique-tile">🕯 <a href="#">Mindfulness Reminders</a></div>
+    </section>
+
+    <section id="scenarios" class="real-life-scenarios">
+      <h2>When Can Wyso Help You?</h2>
+      <ul>
+        <li>After a stressful workday</li>
+        <li>During a panic episode</li>
+        <li>When you're overthinking</li>
+        <li>At night when you can’t sleep</li>
+        <li>When you just want someone to check in</li>
+      </ul>
+    </section>
+
+    <section id="testimonials" class="user-testimonials">
+      <h2>User Testimonials</h2>
+      <blockquote>
+        “Wyso helped me calm down during a panic attack. It felt like someone truly understood me.”
+      </blockquote>
+    </section>
+
+    <section id="quick-start" class="quick-start">
+      <h2>Talk to Wyso Now</h2>
+      <p>💬 It's free, friendly, and private.</p>
+      <a href="#chat" class="cta-button">Start Chatting</a>
+    </section>
+
+    <section id="resources" class="wellness-resources">
+      <h2>Wellness Resources</h2>
+      <ul>
+        <li><a href="#">7 Natural Ways to Reduce Anxiety</a></li>
+        <li><a href="#">Understanding Emotional Triggers</a></li>
+        <li><a href="#">How to Build a Simple Nighttime Routine</a></li>
+      </ul>
+    </section>
+
+    <section id="join" class="join-movement">
+      <h2>Join the Movement</h2>
+      <p>Be part of a community that puts mental well-being first. Start your emotional wellness journey today.</p>
+      <a href="#chat" class="cta-button">Join Us</a>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">What is Wyso?</div>
+        <div class="faq-answer">Wyso is an AI companion designed to help you manage stress and anxiety through conversation and support.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Is my data safe with Wyso?</div>
+        <div class="faq-answer">Yes, we prioritize your privacy and ensure that your data is secure and confidential.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How can I start using Wyso?</div>
+        <div class="faq-answer">Simply click on the "Start Chatting" button to begin your journey with Wyso.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Wyso. All rights reserved.</p>
+    <div class="social-media">
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    // Dark Mode Toggle Functionality
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        const sections = document.querySelectorAll('.how-wyso-helps, .featured-techniques, .real-life-scenarios, .user-testimonials, .quick-start, .wellness-resources, .join-movement, .faq');
+        sections.forEach(section => {
+            section.classList.toggle('dark-mode');
+        });
+    });
+  </script>
+</body>
+</html>

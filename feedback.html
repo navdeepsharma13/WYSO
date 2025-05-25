@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WYSO Feedback <img src="c:\Users\stech\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\08FC80DE8121419136E443A70489C123\WhatsApp Image 2025-05-26 at 00.20.57_906fc459.jpg"></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1588776814546-bc7d19713a06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 15px;
+      backdrop-filter: blur(4px);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .feedback-tile {
+      background-color: rgba(255, 255, 255, 0.96);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 123, 255, 0.25);
+      width: 100%;
+      max-width: 800px;
+      animation: fadeInUp 1s;
+      overflow: hidden;
+      border: 2px solid #007bff;
+      transition: background-color 0.3s;
+    }
+
+    .tile-header {
+      background: linear-gradient(135deg, #007bff, #66b2ff);
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .tile-body {
+      padding: 30px;
+    }
+
+    .info-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .info-section h4 {
+      color: #0056b3;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .info-section p {
+      color: #333;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .rating {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      font-size: 32px;
+      color: #ccc;
+      cursor: pointer;
+      transition: transform 0.2s, color 0.3s;
+    }
+
+    .rating label:hover,
+    .rating input:checked ~ label {
+      color: #007bff;
+      transform: scale(1.2);
+    }
+
+    textarea {
+      resize: none;
+      border-radius: 10px;
+      border: 2px solid #007bff;
+    }
+
+    .btn-submit {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #0056b3;
+    }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+
+    label.form-label {
+      color: #0056b3;
+      font-weight: 500;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #333;
+      color: #f4f4f4;
+    }
+
+    .feedback-tile.dark-mode {
+      background-color: rgba(50, 50, 50, 0.9);
+      border: 2px solid #0056b3;
+    }
+
+    .tile-header.dark-mode {
+      background: linear-gradient(135deg, #0056b3, #66b2ff);
+    }
+
+    .info-section h4.dark-mode {
+      color: #66b2ff;
+    }
+
+    .info-section p.dark-mode {
+      color: #f4f4f4;
+    }
+
+    .quote.dark-mode {
+      color: #66b2ff;
+    }
+
+    .btn-submit.dark-mode {
+      background-color: #0056b3;
+    }
+
+    .btn-submit.dark-mode:hover {
+      background-color: #004494;
+    }
+  </style>
+</head>
+<body>
+  <div class="feedback-tile animate_animated animate_fadeIn">
+    <div class="tile-header">
+      Feedback
+    </div>
+    <div class="tile-body">
+      <div class="info-section">
+        <h4>About WYSO</h4>
+        <p>WYSO is your supportive mental health chatbot designed to listen, understand, and assist.</p>
+        <p>Our goal is to help you manage stress, emotions, and daily mental wellness—one chat at a time.</p>
+        <p class="quote">“Your voice matters. Your feedback helps us grow.”</p>
+        <p style="color:#0066cc;"><strong>All feedback is reviewed, and we actively work to improve your experience.</strong></p>
+      </div>
+
+      <form id="feedbackForm">
+        <div class="rating mb-4">
+          <input type="radio" id="star5" name="rating" value="5" />
+          <label for="star5">&#9733;</label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4">&#9733;</label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3">&#9733;</label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2">&#9733;</label>
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1">&#9733;</label>
+        </div>
+
+        <div class="mb-3">
+          <label for="suggestions" class="form-label">What can we improve?</label>
+          <textarea class="form-control" id="suggestions" rows="4" placeholder="Your suggestions..."></textarea>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-submit">Submit</button>
+        </div>
+        <p class="thank-you" id="thankYouMsg">Thank you for your feedback!</p>
+      </form>
+    </div>
+  </div>
+
+  <button id="theme-toggle" class="btn btn-secondary" style="position: fixed; top: 20px; right: 20px;">Toggle Dark Mode</button>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const thankYouMsg = document.getElementById('thankYouMsg');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      form.reset();
+      thankYouMsg.style.display = 'block';
+    });
+
+    themeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      const feedbackTile = document.querySelector('.feedback-tile');
+      feedbackTile.classList.toggle('dark-mode');
+      const tileHeader = document.querySelector('.tile-header');
+      tileHeader.classList.toggle('dark-mode');
+      const infoSections = document.querySelectorAll('.info-section h4, .info-section p, .quote');
+      infoSections.forEach(section => section.classList.toggle('dark-mode'));
+      const submitButton = document.querySelector('.btn-submit');
+      submitButton.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>
