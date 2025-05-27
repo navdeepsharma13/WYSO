@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wyso - Register & Login</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: #f4f7fa;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      color: #333;
+      transition: background-color 0.4s, color 0.4s;
+    }
+    .container {
+      background: #fff;
+      margin: 40px 20px;
+      width: 400px;
+      max-width: 90vw;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 123, 255, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      transition: background-color 0.4s, color 0.4s;
+    }
+    header {
+      background: #007bff;
+      color: white;
+      padding: 20px 30px;
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      transition: background-color 0.4s;
+    }
+    nav {
+      display: flex;
+      background: #e9ecef;
+      border-bottom: 2px solid #007bff;
+      transition: background-color 0.4s, border-color 0.4s;
+    }
+    nav button {
+      flex: 1;
+      padding: 15px 0;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      font-weight: 600;
+      color: #007bff;
+      transition: background-color 0.3s, color 0.3s;
+      border-bottom: 4px solid transparent;
+    }
+    nav button:hover {
+      background-color: #d6e5ff;
+    }
+    nav button.active {
+      background-color: #007bff;
+      color: white;
+      border-bottom: 4px solid #0056b3;
+      font-weight: 700;
+    }
+
+    form {
+      padding: 30px 30px 40px;
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      transition: color 0.4s;
+    }
+    form.active {
+      display: flex;
+    }
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: inline-block;
+      color: #444;
+      transition: color 0.4s;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 8px;
+      border: 1.8px solid #ddd;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: border-color 0.3s, background-color 0.4s, color 0.4s;
+      background: white;
+      color: #333;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="password"]:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 6px #a8c8ff;
+    }
+    button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 14px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .google-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #de5246;
+      color: white;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      margin: 15px auto 0;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 4px 6px rgba(222, 82, 70, 0.45);
+      transition: background-color 0.3s;
+      text-decoration: none;
+      user-select: none;
+    }
+    .google-btn:hover {
+      background-color: #bf3d33;
+    }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      margin: 20px 0;
+    }
+    .toggle-tip {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      user-select: none;
+      margin-top: 10px;
+    }
+
+    .forgot-password {
+      text-align: right;
+      font-size: 0.85rem;
+      color: #007bff;
+      cursor: pointer;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      user-select: none;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.4s;
+    }
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background: #022849;
+      color: #cdd6f4;
+    }
+    .container.dark-mode {
+      background: #03306c;
+      box-shadow: 0 8px 24px rgba(0, 86, 179, 0.75);
+      color: #cdd6f4;
+    }
+    header.dark-mode {
+      background: #004fbd;
+    }
+    nav.dark-mode {
+      background: #044a8f;
+      border-bottom: 2px solid #002e5a;
+    }
+    nav button.dark-mode {
+      color: #aacbff;
+    }
+    nav button.dark-mode:hover {
+      background-color: #0b3c75;
+    }
+    nav button.dark-mode.active {
+      background-color: #002e5a;
+      color: #e3f2ff;
+      border-bottom: 4px solid #80aaff;
+      font-weight: 700;
+    }
+    label.dark-mode {
+      color: #cbd6f1;
+    }
+    input[type="text"].dark-mode,
+    input[type="email"].dark-mode,
+    input[type="tel"].dark-mode,
+    input[type="password"].dark-mode {
+      background: #0e2b63;
+      border: 1.8px solid #355a9f;
+      color: #cdd6f4;
+    }
+    input[type="text"].dark-mode:focus,
+    input[type="email"].dark-mode:focus,
+    input[type="tel"].dark-mode:focus,
+    input[type="password"].dark-mode:focus {
+      border-color: #80aaff;
+      box-shadow: 0 0 8px #80aaff;
+      outline: none;
+    }
+    button[type="submit"].dark-mode {
+      background-color: #003d99;
+      color: #e3f2ff;
+    }
+    button[type="submit"].dark-mode:hover {
+      background-color: #002b7a;
+    }
+    .google-btn.dark-mode {
+      background-color: #b63b36;
+      box-shadow: 0 4px 6px rgba(182, 59, 54, 0.7);
+    }
+    .google-btn.dark-mode:hover {
+      background-color: #8e2e2a;
+    }
+    .forgot-password.dark-mode {
+      color: #80aaff;
+    }
+    .forgot-password.dark-mode:hover {
+      color: #aaccff;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        width: 100%;
+        margin: 20px 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      nav button {
+        font-size: 1rem;
+        padding: 12px 0;
+      }
+      form {
+        padding: 20px;
+      }
+      button[type="submit"], .google-btn {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Authentication container">
+    <header>Wyso</header>
+    
+    <!-- Toggle Dark Mode Button -->
+    <button id="toggle-dark-mode" aria-pressed="false" aria-label="Toggle dark mode" style="margin: 20px auto; padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 8px; transition: background-color 0.3s;">Toggle Dark Mode</button>
+
+    <nav aria-label="Authentication tabs">
+      <button id="tab-login" class="active" aria-selected="true" aria-controls="login-form" role="tab" tabindex="0">Login</button>
+      <button id="tab-register" aria-selected="false" aria-controls="register-form" role="tab" tabindex="-1">Register</button>
+    </nav>
+
+    <form id="login-form" class="active" aria-labelledby="tab-login" novalidate>
+      <label for="login-email">Email address</label>
+      <input type="email" id="login-email" name="email" placeholder="you@example.com" required autocomplete="username" />
+      
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
+
+      <a href="#" class="forgot-password" tabindex="0">Forgot Password?</a>
+
+      <button type="submit">Login</button>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <button type="button" class="google-btn" aria-label="Login with Google">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20" fill="white">
+          <path d="M21.35 11.1h-9.17v2.98h5.39c-.23 1.44-1.61 4.23-5.39 4.23-3.26 0-5.93-2.71-5.93-6.05 0-3.34 2.67-6.05 5.93-6.05 1.85 0 3.09.8 3.8 1.48l2.6-2.51C17.08 5.63 15.14 5 13.19 5 8.48 5 4.41 8.78 4.41 13.88c0 5.1 4.22 8.85 9.65 8.85 5.56 0 9.28-3.91 9.28-9.4 0-.63-.07-1.12-.12-1.23z"></path>
+        </svg>
+        Login with Google
+      </button>
+    </form>
+
+    <form id="register-form" aria-labelledby="tab-register" novalidate>
+      <label for="register-fullname">Full Name</label>
+      <input type="text" id="register-fullname" name="fullname" placeholder="John Doe" required autocomplete="name" />
+
+      <label for="register-email">Email address</label>
+      <input type="email" id="register-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      
+      <label for="register-mobile">Mobile Number</label>
+      <input type="tel" id="register-mobile" name="mobile" placeholder="+1 234 567 8901" required autocomplete="tel" pattern="^\+?[0-9\s\-]{7,15}$" title="Enter valid phone number with country code." />
+
+      <label for="register-password">Password</label>
+      <input type="password" id="register-password" name="password" placeholder="Create a password" required autocomplete="new-password" minlength="8" />
+
+      <label for="register-password-confirm">Confirm Password</label>
+      <input type="password" id="register-password-confirm" name="password-confirm" placeholder="Confirm your password" required autocomplete="new-password" minlength="8" />
+
+      <button type="submit">Register</button>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <button type="button" class="google-btn" aria-label="Register with Google">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20" fill="white">
+          <path d="M21.35 11.1h-9.17v2.98h5.39c-.23 1.44-1.61 4.23-5.39 4.23-3.26 0-5.93-2.71-5.93-6.05 0-3.34 2.67-6.05 5.93-6.05 1.85 0 3.09.8 3.8 1.48l2.6-2.51C17.08 5.63 15.14 5 13.19 5 8.48 5 4.41 8.78 4.41 13.88c0 5.1 4.22 8.85 9.65 8.85 5.56 0 9.28-3.91 9.28-9.4 0-.63-.07-1.12-.12-1.23z"></path>
+        </svg>
+        Register with Google
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Tab switching logic
+    const loginTab = document.getElementById('tab-login');
+    const registerTab = document.getElementById('tab-register');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const toggleDarkMode = document.getElementById('toggle-dark-mode');
+    const body = document.body;
+    const container = document.querySelector('.container');
+
+    loginTab.addEventListener('click', () => {
+      loginTab.classList.add('active');
+      loginTab.setAttribute('aria-selected', 'true');
+      loginTab.setAttribute('tabindex', '0');
+      registerTab.classList.remove('active');
+      registerTab.setAttribute('aria-selected', 'false');
+      registerTab.setAttribute('tabindex', '-1');
+
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+    });
+
+    registerTab.addEventListener('click', () => {
+      registerTab.classList.add('active');
+      registerTab.setAttribute('aria-selected', 'true');
+      registerTab.setAttribute('tabindex', '0');
+      loginTab.classList.remove('active');
+      loginTab.setAttribute('aria-selected', 'false');
+      loginTab.setAttribute('tabindex', '-1');
+
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+    });
+
+    // Simple password confirmation validation for registration form
+    const registerPassword = document.getElementById('register-password');
+    const registerPasswordConfirm = document.getElementById('register-password-confirm');
+    registerForm.addEventListener('submit', function (e) {
+      if (registerPassword.value !== registerPasswordConfirm.value) {
+        e.preventDefault();
+        alert('Passwords do not match!');
+        registerPasswordConfirm.focus();
+      }
+    });
+
+    // Toggle dark mode with dark blue theme and toggle button color change
+    toggleDarkMode.addEventListener('click', () => {
+      const isDark = body.classList.toggle('dark-mode');
+      container.classList.toggle('dark-mode');
+
+      // Toggle dark-mode class on inputs
+      document.querySelectorAll('input').forEach(input => input.classList.toggle('dark-mode'));
+      // Toggle dark-mode on nav buttons
+      document.querySelectorAll('nav button').forEach(button => button.classList.toggle('dark-mode'));
+      // Toggle dark-mode on submit and google buttons
+      document.querySelectorAll('button[type="submit"], .google-btn').forEach(button => button.classList.toggle('dark-mode'));
+      // Toggle dark-mode on labels and forgot-password
+      document.querySelectorAll('label, .forgot-password').forEach(el => el.classList.toggle('dark-mode'));
+
+      // Change toggle button color and aria-pressed state
+      if (isDark) {
+        toggleDarkMode.style.backgroundColor = '#002b7a'; // dark blue
+        toggleDarkMode.setAttribute('aria-pressed', 'true');
+      } else {
+        toggleDarkMode.style.backgroundColor = '#007bff'; // original blue
+        toggleDarkMode.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // Basic HTML5 validation will handle most input requirements.
+  </script>
+</body>
+</html>
